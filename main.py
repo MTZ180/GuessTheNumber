@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 import welcome_screen
 import game_screen
+from kivy.lang import Builder
 
 class Main(ScreenManager):
     def __init__(self, **kwargs):
@@ -11,6 +12,7 @@ class Main(ScreenManager):
 
 class GuessTheNumberApp(App):
     def build(self):
+        Builder.load_file('welcome_screen.kv')
         return Main()
     
 if __name__ == '__main__':
