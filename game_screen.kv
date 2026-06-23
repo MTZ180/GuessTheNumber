@@ -1,0 +1,54 @@
+#:kivy 2.3.1
+
+<GameScreen>:
+    name: 'game_screen'
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            size_hint: 0.5, 0.3
+            orientation: 'vertical'
+            spacing: 20
+            Label:
+                text: "Guess the number between 1 and 100!"
+                color: 0.5, 0.5, 1, 1
+                font_size: self.height * 0.8
+                halign: 'center'
+                valign: 'middle'
+
+            Label:
+                id: feedback_label
+                text: root.feedback
+                color: 0.9, 0, 0, 1
+                font_size: self.height * 0.5
+                halign: 'center'
+                valign: 'middle'
+
+            BoxLayout:
+                orientation:'horizontal'
+                spacing: 20
+                TextInput:
+                    id: guess_input
+                    foreground_color: 0, 0, 1, 1
+                    hint_text_color: 0.5, 0.5, 0.5, 1
+                    cursor_color: 0.5, 0.5, 1, 1
+                    hint_text: 'Enter your guess'
+                    font_size: self.height * 0.5
+                    multiline: False
+                    password: False
+                    input_filter: 'int'
+                    on_text_validate:
+                        root.check_guess(int(self.text))
+                        self.text = ''
+                Button:
+                    text: 'Submit'
+                    font_size: self.height * 0.5
+                    on_press: root.check_guess(int(guess_input.text))
