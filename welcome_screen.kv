@@ -2,18 +2,50 @@
 
 <WelcomeScreen>:
     name: 'welcome_screen'
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 20
-        padding: 50
-        Label:
-            text: 'Welcome to Guess The Number!'
-            font_size: 32
-            size_hint_y: None
-            height: self.texture_size[1]
-        Button:
-            text: 'Start Game'
-            font_size: 24
-            size_hint_y: None
-            height: 50
-            on_press: root.start_game()
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            size_hint: 0.5, 0.3
+            orientation: 'vertical'
+            spacing: 20
+            Label:
+                text: "Welcome to\n'Guess The Number' game!"
+                color: 0.5, 0.5, 1, 1
+                font_size: self.height * 0.4
+                halign: 'center'
+                valign: 'middle'
+
+            Button:
+                text: 'Start Game'
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: None
+                width: self.height * 3
+                font_size: self.height * 0.4
+                color: 1, 1, 1, 1
+                background_normal: ''
+                background_color: 0, 0, 0, 0
+                on_press: root.start_game()
+
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 1, 1
+                    RoundedRectangle:
+                        pos: self.x - self.width * 0.005, self.y - self.height * 0.015
+                        size: self.width * 1.01, self.height * 1.03
+                        radius: [(self.height * 1.05) / 2,]
+
+                    Color:
+                        rgba: 0.5, 0.5, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [self.height / 2,]
